@@ -77,6 +77,7 @@
         .info-pane p { font-size: 0.8rem; color: #aaa; line-height: 1.5; }
 
         .btn-main { width: 100%; padding: 18px; border-radius: 15px; border: none; background: #fff; color: #000; font-weight: 700; font-size: 0.95rem; cursor: pointer; margin-top: auto; }
+        .btn-sec { width: 100%; padding: 18px; border-radius: 15px; border: 1px solid var(--cyan); background: transparent; color: var(--cyan); font-weight: 700; font-size: 0.95rem; cursor: pointer; margin-bottom: 10px; }
         .back-link { text-align: center; margin-top: 20px; font-size: 0.65rem; color: #555; text-transform: uppercase; letter-spacing: 2px; font-weight: 600; cursor: pointer; }
 
         .footer-links { text-align: center; margin-top: 12px; opacity: 0.3; display: flex; justify-content: center; gap: 15px; }
@@ -161,8 +162,33 @@
                 <p id="res-obs">---</p>
             </div>
         </div>
+        
+        <button class="btn-sec" onclick="step(7, '', '')">PROSSEGUIR</button>
         <button class="btn-main" onclick="location.reload()">NOVA CONSULTA</button>
         <div class="footer-links"><a href="#">Privacidade</a><a href="#">Termos</a></div>
+    </section>
+
+    <section>
+        <div class="tag">Guia de Preparação</div>
+        <h2>Dicas de <span style="color:var(--cyan)">Logística.</span></h2>
+        
+        <div class="info-pane">
+            <h4>Bagagem Inteligente</h4>
+            <p>Priorize roupas de compressão. Leve adaptadores de tomada universais e cópias físicas de todos os documentos em uma pasta de mão. Evite excessos; compre itens de higiene no destino.</p>
+        </div>
+
+        <div class="info-pane">
+            <h4>Entrevista no Consulado</h4>
+            <p>Seja direto e honesto. Tenha em mãos o comprovante de hospedagem e meios financeiros. O foco deve ser o seu objetivo (estudo/trabalho) e sua intenção de respeitar as leis locais.</p>
+        </div>
+
+        <div class="info-pane">
+            <h4>Chegada e Chip</h4>
+            <p>Garanta um chip de celular (e-SIM) antes de embarcar ou no aeroporto. Tenha dinheiro em espécie (moeda local) para emergências de transporte inicial.</p>
+        </div>
+
+        <button class="btn-main" onclick="location.reload()">FINALIZAR TUDO</button>
+        <div class="back-link" onclick="back(6)">Voltar ao Relatório</div>
     </section>
 
 </div>
@@ -182,7 +208,7 @@
         }
     }
 
-    function step(s, k, v) { choices[k] = v; vp.style.transform = `translateX(-${s * 100}vw)`; }
+    function step(s, k, v) { if(k) choices[k] = v; vp.style.transform = `translateX(-${s * 100}vw)`; }
     function back(s) { vp.style.transform = `translateX(-${s * 100}vw)`; }
     function moveVetor(v) { choices.t = v; vp.style.transform = (v === 'estudo') ? `translateX(-400vw)` : `translateX(-500vw)`; }
 
