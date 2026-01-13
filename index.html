@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>BESI - Immigration Intelligence</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:ital,wght@0,700;0,800&display=swap" rel="stylesheet">
+    
+    <style>
+        :root { 
+            --cyan: #00f2ff; 
+            --bg: #050505; 
+            --card: rgba(255, 255, 255, 0.03); 
+            --border: rgba(255, 255, 255, 0.08); 
+            --font-main: 'Inter', -apple-system, sans-serif;
+            --font-title: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        * { 
+            margin: 0; padding: 0; box-sizing: border-box; 
+            -webkit-tap-highlight-color: transparent; 
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        
+        body { 
+            background: var(--bg); 
+            color: #ffffff; 
+            font-family: var(--font-main);
+            overflow: hidden; 
+            height: 100vh; 
+        }
+
+        header { 
+            position: fixed; top: 0; width: 100%; padding: 45px 0; 
+            text-align: center; z-index: 100; 
+            letter-spacing: 14px;
+            font-family: var(--font-title);
+            font-weight: 800; font-size: 0.75rem; opacity: 0.3;
+        }
+
+        .viewport { display: flex; width: 800vw; height: 100vh; transition: transform 0.6s cubic-bezier(0.2, 0, 0, 1); }
+        
+        section { 
+            width: 100vw; height: 100vh; 
+            padding: 120px 30px 40px; 
+            display: flex; flex-direction: column;
+            overflow-y: auto;
+        }
+
+        .tag { font-size: 0.6rem; color: var(--cyan); letter-spacing: 5px; font-weight: 700; margin-bottom: 12px; text-transform: uppercase; }
+
+        h2 { font-family: var(--font-title); font-size: 2.4rem; font-weight: 800; line-height: 1.05; margin-bottom: 35px; letter-spacing: -1.5px; }
+
+        input { 
+            background: var(--card); border: 1.5px solid var(--border); border-radius: 20px; 
+            padding: 24px; color: #fff; font-size: 1.15rem; width: 100%; outline: none; transition: 0.3s;
+            font-family: var(--font-main); font-weight: 400;
+        }
+        input:focus { border-color: var(--cyan); background: rgba(0, 242, 255, 0.02); }
+        input.error { border-color: #ff4d4d; animation: shake 0.4s; }
+        .error-msg { color: #ff4d4d; font-size: 0.8rem; margin: 12px 0; display: none; font-weight: 500; }
+
+        .card { background: var(--card); border: 1px solid var(--border); border-radius: 26px; padding: 28px; margin-bottom: 16px; cursor: pointer; transition: 0.3s ease; }
+        .card:active { transform: scale(0.97); border-color: var(--cyan); background: rgba(0, 242, 255, 0.05); }
+        .card h3 { font-family: var(--font-title); font-size: 1.3rem; font-weight: 700; margin-bottom: 6px; letter-spacing: -0.5px; }
+        .card p { font-size: 0.95rem; color: #888; line-height: 1.6; font-weight: 400; }
+
+        .res-box { background: #000; border: 1px solid var(--border); border-radius: 35px; padding: 30px; margin-bottom: 25px; }
+        .res-visto { font-family: var(--font-title); font-size: 1.9rem; font-weight: 800; color: var(--cyan); margin-bottom: 6px; letter-spacing: -1px; }
+        
+        .grid-data { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 25px 0; }
+        .data-item { background: rgba(255,255,255,0.03); padding: 20px; border-radius: 22px; border: 1px solid var(--border); }
+        .data-item small { display: block; font-size: 0.55rem; color: var(--cyan); text-transform: uppercase; margin-bottom: 8px; letter-spacing: 1.5px; font-weight: 700; }
+        .data-item span { font-size: 1.1rem; font-weight: 700; font-family: var(--font-title); }
+
+        .info-pane { background: rgba(255,255,255,0.015); padding: 25px; border-radius: 26px; border: 1px solid var(--border); margin-bottom: 15px; }
+        .info-pane h4 { font-family: var(--font-title); font-size: 0.75rem; color: var(--cyan); text-transform: uppercase; margin-bottom: 12px; letter-spacing: 2px; }
+        .info-pane p { font-size: 0.9rem; color: #aaa; line-height: 1.7; font-weight: 400; }
+
+        .btn-main { width: 100%; padding: 24px; border-radius: 22px; border: none; background: #fff; color: #000; font-family: var(--font-main); font-weight: 700; font-size: 1.05rem; cursor: pointer; margin-top: auto; }
+        .back-link { text-align: center; margin-top: 30px; font-size: 0.75rem; color: #444; text-transform: uppercase; letter-spacing: 3px; font-weight: 600; cursor: pointer; }
+
+        .footer-links { text-align: center; margin-top: 15px; opacity: 0.4; display: flex; justify-content: center; gap: 15px; }
+        .footer-links a { color: #fff; font-size: 0.6rem; text-decoration: none; text-transform: uppercase; letter-spacing: 1px; font-weight: 600; }
+
+        @keyframes shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-6px); } 75% { transform: translateX(6px); } }
+    </style>
+</head>
+<body>
+
+<header>B E S I</header>
+
+<div class="viewport" id="viewport">
+    
+    <section>
+        <div class="tag">System Start</div>
+        <h2>Seja bem-vindo.<br>Qual seu <span style="color:var(--cyan)">nome?</span></h2>
+        <input type="text" id="user-name" placeholder="Ex: Daniel Santos" autocomplete="off">
+        <p class="error-msg" id="name-err">Insira um nome válido (mín. 3 letras).</p>
+        <button class="btn-main" onclick="validateName()">INICIAR CONSULTA</button>
+    </section>
+
+    <section>
+        <div class="tag">01 . Perfil</div>
+        <h2>Você possui <span style="color:var(--cyan)">suporte</span> local?</h2>
+        <div class="card" onclick="step(2, 'f', 'sozinho')"><h3>Estou sozinho</h3><p>Independência financeira total e planejamento solo.</p></div>
+        <div class="card" onclick="step(2, 'f', 'familia')"><h3>Tenho família</h3><p>Possuo rede de apoio ou moradia garantida no destino.</p></div>
+        <div class="back-link" onclick="back(0)">Voltar</div>
+    </section>
+
+    <section>
+        <div class="tag">02 . Destino</div>
+        <h2>Escolha seu foco de <span style="color:var(--cyan)">imigração.</span></h2>
+        <div class="card" onclick="step(3, 'c', 'Portugal')"><h3>Portugal</h3><p>Acesso via CPLP e facilidade de integração linguística.</p></div>
+        <div class="card" onclick="step(3, 'c', 'Espanha')"><h3>Espanha</h3><p>Permissão de trabalho imediata para estudantes.</p></div>
+        <div class="card" onclick="step(3, 'c', 'EUA')"><h3>EUA</h3><p>Potencial econômico elevado e ganhos em moeda forte.</p></div>
+        <div class="back-link" onclick="back(1)">Voltar</div>
+    </section>
+
+    <section>
+        <div class="tag">03 . Método</div>
+        <h2>Defina seu <span style="color:var(--cyan)">objetivo.</span></h2>
+        <div class="card" onclick="moveVetor('estudo')"><h3>Educação</h3><p>Cursos de idiomas, graduação ou pós-graduação.</p></div>
+        <div class="card" onclick="moveVetor('trabalho')"><h3>Carreira</h3><p>Busca ativa por vagas ou regime remoto.</p></div>
+        <div class="back-link" onclick="back(2)">Voltar</div>
+    </section>
+
+    <section id="sc-estudo">
+        <div class="tag">04 . Formação</div>
+        <h2>Qual nível de <span style="color:var(--cyan)">estudo?</span></h2>
+        <div class="card" onclick="finish('o', 'Universidade')"><h3>Superior / Master</h3><p>Foco em carreira acadêmica e residência longa.</p></div>
+        <div class="card" onclick="finish('o', 'Idioma')"><h3>Curso de Idioma</h3><p>Intercâmbio prático de curta ou média duração.</p></div>
+        <div class="back-link" onclick="back(3)">Voltar</div>
+    </section>
+
+    <section id="sc-trabalho">
+        <div class="tag">04 . Atuação</div>
+        <h2>Qual seu <span style="color:var(--cyan)">perfil?</span></h2>
+        <div class="card" onclick="finish('o', 'Trabalho')"><h3>Procura Local</h3><p>Visto de busca de emprego em solo europeu.</p></div>
+        <div class="card" onclick="finish('o', 'Nomade')"><h3>Digital Nomad</h3><p>Trabalho remoto para empresas internacionais.</p></div>
+        <div class="back-link" onclick="back(3)">Voltar</div>
+    </section>
+
+    <section>
+        <div class="res-box">
+            <div class="tag" id="user-title">RELATÓRIO FINAL</div>
+            <div id="res-visto" class="res-visto">---</div>
+            <p id="res-tempo" style="font-size: 0.75rem; color: #666; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 25px;">Tempo: ---</p>
+            
+            <div class="grid-data">
+                <div class="data-item"><small>Reserva Total</small><span id="res-grana">---</span></div>
+                <div class="data-item"><small>Gasto Mensal</small><span id="res-custo">---</span></div>
+            </div>
+
+            <div class="info-pane">
+                <h4>Documentação Crítica</h4>
+                <p id="res-docs">---</p>
+            </div>
+
+            <div class="info-pane">
+                <h4>Estratégia BESI</h4>
+                <p id="res-obs">---</p>
+            </div>
+        </div>
+        <button class="btn-main" onclick="location.reload()">NOVA CONSULTA</button>
+        
+        <div class="footer-links">
+            <a href="#">Política de Privacidade</a>
+            <a href="#">Termos de Uso</a>
+        </div>
+    </section>
+
+</div>
+
+<script>
+    let choices = { name: '', f: null, c: null, t: null, o: null };
+    const vp = document.getElementById('viewport');
+
+    function validateName() {
+        const input = document.getElementById('user-name');
+        const nameValue = input.value.trim();
+        const namePattern = /^[A-Za-zÀ-ÖØ-öø-ÿ\s]{3,}$/;
+
+        if (!namePattern.test(nameValue)) {
+            input.classList.add('error');
+            document.getElementById('name-err').style.display = 'block';
+            setTimeout(() => input.classList.remove('error'), 400);
+        } else {
+            choices.name = nameValue;
+            vp.style.transform = `translateX(-100vw)`;
+        }
+    }
+
+    function step(s, k, v) { choices[k] = v; vp.style.transform = `translateX(-${s * 100}vw)`; }
+    function back(s) { vp.style.transform = `translateX(-${s * 100}vw)`; }
+    function moveVetor(v) { choices.t = v; vp.style.transform = (v === 'estudo') ? `translateX(-400vw)` : `translateX(-500vw)`; }
+
+    function finish(k, v) {
+        choices.o = v;
+        const key = choices.c + choices.o;
+        const db = {
+            "PortugalUniversidade": { v: "Visto D4 - Acadêmico", t: "4-6 Meses", g: "R$ 52.000", c: "€ 850 - 1.100", d: "Carta de Aceite IES, Seguro PB4 (Gov.br), Antecedentes Apostilados e Alojamento.", o: "O PB4 é obrigatório para isenção do seguro privado. Trabalho permitido em 20h/semana." },
+            "EspanhaIdioma": { v: "Visado de Idiomas", t: "2-3 Meses", g: "R$ 38.000", c: "€ 950 - 1.300", d: "Matrícula Cervantes, Seguro Sanitas Sin Carencia, Exame Médico e Prova de IPREM.", o: "A Espanha permite 30h de trabalho semanais para estudantes. O seguro deve ser sem copagamento." },
+            "PortugalTrabalho": { v: "Visto Procura Trabalho", t: "2-4 Meses", g: "R$ 16.500", c: "€ 900 (Estimado)", d: "Registo IEFP, Seguro Viagem 120 dias, Passagem Volta e Prova de Subsistência.", o: "Válido por 120 dias prorrogáveis. Ao conseguir contrato, solicita-se a residência oficial." }
+        };
+
+        const res = db[key] || { v: "Visto Selecionado", t: "3 Meses", g: "R$ 30k+", c: "€ 1000", d: "Documentos padrão consulares.", o: "Consulte o consulado para detalhes específicos." };
+        
+        document.getElementById('user-title').innerText = `PLANO DE ${choices.name.toUpperCase()}`;
+        document.getElementById('res-visto').innerText = res.v;
+        document.getElementById('res-tempo').innerText = `Tempo Médio: ${res.t}`;
+        document.getElementById('res-grana').innerText = res.g;
+        document.getElementById('res-custo').innerText = res.c;
+        document.getElementById('res-docs').innerText = res.d;
+        document.getElementById('res-obs').innerText = res.o;
+        vp.style.transform = `translateX(-600vw)`;
+    }
+</script>
+
+</body>
+</html>
+
