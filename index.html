@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>BESI - Immigration Intelligence</title>
+    <title>Portugal Expert - Consultoria</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -11,7 +11,7 @@
     
     <style>
         :root { 
-            --cyan: #00f2ff; 
+            --gold: #d4af37; 
             --bg: #050505; 
             --card: rgba(255, 255, 255, 0.04); 
             --border: rgba(255, 255, 255, 0.08); 
@@ -21,32 +21,19 @@
 
         * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
         
-        body { 
-            background: var(--bg); 
-            color: #ffffff; 
-            font-family: var(--font-main);
-            overflow: hidden; 
-            height: 100vh; 
-        }
+        body { background: var(--bg); color: #ffffff; font-family: var(--font-main); overflow: hidden; height: 100vh; position: relative; }
 
         header { 
             position: fixed; top: 0; width: 100%; padding: 25px 0; 
-            text-align: center; z-index: 100; 
-            letter-spacing: 10px;
-            font-family: var(--font-title);
-            font-weight: 800; font-size: 0.65rem; opacity: 0.4;
+            text-align: center; z-index: 100; letter-spacing: 5px;
+            font-family: var(--font-title); font-weight: 800; font-size: 0.65rem; color: var(--gold);
         }
 
-        .viewport { display: flex; width: 800vw; height: 100vh; transition: transform 0.5s cubic-bezier(0.2, 0, 0, 1); }
+        .viewport { display: flex; width: 600vw; height: 100vh; transition: transform 0.5s cubic-bezier(0.2, 0, 0, 1); }
         
-        section { 
-            width: 100vw; height: 100vh; 
-            padding: 90px 25px 30px; 
-            display: flex; flex-direction: column;
-            overflow-y: auto;
-        }
+        section { width: 100vw; height: 100vh; padding: 90px 25px 30px; display: flex; flex-direction: column; overflow-y: auto; position: relative; z-index: 2; }
 
-        .tag { font-size: 0.55rem; color: var(--cyan); letter-spacing: 3px; font-weight: 700; margin-bottom: 8px; text-transform: uppercase; }
+        .tag { font-size: 0.55rem; color: var(--gold); letter-spacing: 3px; font-weight: 700; margin-bottom: 8px; text-transform: uppercase; }
 
         h2 { font-family: var(--font-title); font-size: 1.8rem; font-weight: 800; line-height: 1.1; margin-bottom: 25px; letter-spacing: -1px; }
 
@@ -54,186 +41,202 @@
             background: var(--card); border: 1px solid var(--border); border-radius: 15px; 
             padding: 18px; color: #fff; font-size: 1rem; width: 100%; outline: none; transition: 0.3s;
         }
-        input:focus { border-color: var(--cyan); background: rgba(0, 242, 255, 0.02); }
+        input:focus { border-color: var(--gold); background: rgba(212, 175, 55, 0.05); }
+        input.error { border-color: #ff4d4d !important; animation: shake 0.3s; box-shadow: 0 0 15px rgba(255, 77, 77, 0.15); }
 
         .card { 
             background: var(--card); border: 1px solid var(--border); border-radius: 20px; 
             padding: 20px; margin-bottom: 12px; cursor: pointer; transition: 0.2s ease; 
         }
-        .card:active { transform: scale(0.98); border-color: var(--cyan); background: rgba(0, 242, 255, 0.05); }
-        .card h3 { font-family: var(--font-title); font-size: 1.1rem; font-weight: 700; margin-bottom: 4px; }
-        .card p { font-size: 0.85rem; color: #888; line-height: 1.4; }
+        .card:active { transform: scale(0.96); border-color: var(--gold); }
 
         .res-box { background: #000; border: 1px solid var(--border); border-radius: 25px; padding: 20px; margin-bottom: 15px; }
-        .res-visto { font-family: var(--font-title); font-size: 1.5rem; font-weight: 800; color: var(--cyan); margin-bottom: 4px; }
+        .res-visto { font-family: var(--font-title); font-size: 1.5rem; font-weight: 800; color: var(--gold); margin-bottom: 4px; }
         
-        .grid-data { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 15px 0; }
-        .data-item { background: rgba(255,255,255,0.03); padding: 15px; border-radius: 18px; border: 1px solid var(--border); }
-        .data-item small { display: block; font-size: 0.5rem; color: var(--cyan); text-transform: uppercase; margin-bottom: 4px; letter-spacing: 1px; font-weight: 700; }
-        .data-item span { font-size: 0.95rem; font-weight: 700; }
-
         .info-pane { background: rgba(255,255,255,0.015); padding: 18px; border-radius: 20px; border: 1px solid var(--border); margin-bottom: 10px; }
-        .info-pane h4 { font-family: var(--font-title); font-size: 0.65rem; color: var(--cyan); text-transform: uppercase; margin-bottom: 6px; letter-spacing: 1.5px; }
+        .info-pane h4 { font-family: var(--font-title); font-size: 0.65rem; color: var(--gold); text-transform: uppercase; margin-bottom: 6px; letter-spacing: 1.5px; }
         .info-pane p { font-size: 0.8rem; color: #aaa; line-height: 1.5; }
 
-        .btn-main { width: 100%; padding: 18px; border-radius: 15px; border: none; background: #fff; color: #000; font-weight: 700; font-size: 0.95rem; cursor: pointer; margin-top: auto; }
-        .btn-sec { width: 100%; padding: 18px; border-radius: 15px; border: 1px solid var(--cyan); background: transparent; color: var(--cyan); font-weight: 700; font-size: 0.95rem; cursor: pointer; margin-bottom: 10px; }
+        .btn-main { width: 100%; padding: 18px; border-radius: 15px; border: none; background: #fff; color: #000; font-weight: 700; font-size: 0.95rem; cursor: pointer; margin-top: auto; transition: 0.2s; }
+        .btn-main:active { transform: scale(0.95); }
+
+        .btn-whatsapp { width: 100%; padding: 18px; border-radius: 15px; border: none; background: #25D366; color: #fff; font-weight: 700; font-size: 0.95rem; cursor: pointer; margin-bottom: 10px; text-decoration: none; display: block; text-align: center; transition: 0.2s; }
+        .btn-whatsapp:active { transform: scale(0.95); }
+
         .back-link { text-align: center; margin-top: 20px; font-size: 0.65rem; color: #555; text-transform: uppercase; letter-spacing: 2px; font-weight: 600; cursor: pointer; }
 
-        .footer-links { text-align: center; margin-top: 12px; opacity: 0.3; display: flex; justify-content: center; gap: 15px; }
-        .footer-links a { color: #fff; font-size: 0.55rem; text-decoration: none; text-transform: uppercase; font-weight: 600; }
+        @keyframes shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-6px); } 75% { transform: translateX(6px); } }
 
-        @keyframes shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-4px); } 75% { transform: translateX(4px); } }
-        .error { border-color: #ff4d4d !important; animation: shake 0.3s; }
+        /* LOADSCREEN PREMIUM */
+        #loadscreen {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: #000; display: flex; flex-direction: column;
+            justify-content: center; align-items: center; z-index: 1000;
+            transition: opacity 0.8s ease;
+        }
+        .spinner {
+            width: 30px; height: 30px; border: 2px solid rgba(212, 175, 55, 0.1);
+            border-top: 2px solid var(--gold); border-radius: 50%;
+            animation: spin 0.8s linear infinite; margin-bottom: 20px;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        /* EFEITO DE PARTÍCULAS (GLOW) */
+        .particle {
+            position: absolute; background: var(--gold); border-radius: 50%;
+            pointer-events: none; opacity: 0; z-index: 1;
+            animation: float 10s infinite ease-in-out;
+        }
+        @keyframes float {
+            0% { transform: translateY(0) translateX(0); opacity: 0; }
+            50% { opacity: 0.3; }
+            100% { transform: translateY(-100vh) translateX(20vw); opacity: 0; }
+        }
     </style>
 </head>
 <body>
 
-<header>B E S I</header>
+<div id="loadscreen">
+    <div class="spinner"></div>
+    <div class="tag">Portugal Intelligence</div>
+</div>
+
+<header>P O R T U G A L &nbsp; E X P E R T</header>
+
+<div id="particles-container"></div>
 
 <div class="viewport" id="viewport">
     
     <section>
-        <div class="tag">System Start</div>
-        <h2>Seja bem-vindo.<br>Qual seu <span style="color:var(--cyan)">nome?</span></h2>
-        <input type="text" id="user-name" placeholder="Nome Completo" autocomplete="off">
-        <button class="btn-main" style="margin-top: 15px" onclick="validateName()">INICIAR CONSULTA</button>
+        <div class="tag">Bem-vindo ao Futuro</div>
+        <h2>Vamos planejar sua <span style="color:var(--gold)">imigração.</span> Qual seu nome?</h2>
+        <input type="text" id="user-name" placeholder="Nome Completo">
+        <button class="btn-main" style="margin-top: 15px" onclick="validateName()">INICIAR ANÁLISE</button>
     </section>
 
     <section>
         <div class="tag">01 . Perfil</div>
-        <h2>Você possui <span style="color:var(--cyan)">suporte</span> local?</h2>
-        <div class="card" onclick="step(2, 'f', 'sozinho')"><h3>Estou sozinho</h3><p>Independência financeira total e planejamento solo.</p></div>
-        <div class="card" onclick="step(2, 'f', 'familia')"><h3>Tenho família</h3><p>Possuo rede de apoio ou moradia garantida.</p></div>
+        <h2>Como você pretende se <span style="color:var(--gold)">sustentar</span> em Portugal?</h2>
+        <div class="card" onclick="step(2, 'perfil', 'trabalho')"><h3>Quero trabalhar lá</h3><p>Busca de emprego ou visto CPLP.</p></div>
+        <div class="card" onclick="step(2, 'perfil', 'estudo')"><h3>Vou para Estudar</h3><p>Universidade, Master ou Idiomas.</p></div>
+        <div class="card" onclick="step(2, 'perfil', 'remoto')"><h3>Trabalho Remoto</h3><p>Freelancer ou Nômade Digital.</p></div>
+        <div class="card" onclick="step(2, 'perfil', 'turismo')"><h3>Apenas Turismo</h3><p>Visita curta de até 90 dias.</p></div>
         <div class="back-link" onclick="back(0)">Voltar</div>
     </section>
 
     <section>
-        <div class="tag">02 . Destino</div>
-        <h2>Escolha seu foco de <span style="color:var(--cyan)">imigração.</span></h2>
-        <div class="card" onclick="step(3, 'c', 'Portugal')"><h3>Portugal</h3><p>Acesso CPLP e integração facilitada.</p></div>
-        <div class="card" onclick="step(3, 'c', 'Espanha')"><h3>Espanha</h3><p>Permissão de trabalho para estudantes.</p></div>
-        <div class="card" onclick="step(3, 'c', 'EUA')"><h3>EUA</h3><p>Potencial econômico em moeda forte.</p></div>
+        <div class="tag">02 . Detalhes</div>
+        <h2>Qual sua situação <span style="color:var(--gold)">atual?</span></h2>
+        <div id="opcoes-detalhe"></div>
         <div class="back-link" onclick="back(1)">Voltar</div>
     </section>
 
     <section>
-        <div class="tag">03 . Método</div>
-        <h2>Defina seu <span style="color:var(--cyan)">objetivo.</span></h2>
-        <div class="card" onclick="moveVetor('estudo')"><h3>Educação</h3><p>Cursos de idiomas ou graduação.</p></div>
-        <div class="card" onclick="moveVetor('trabalho')"><h3>Carreira</h3><p>Busca por vagas ou trabalho remoto.</p></div>
-        <div class="back-link" onclick="back(2)">Voltar</div>
-    </section>
-
-    <section id="sc-estudo">
-        <div class="tag">04 . Formação</div>
-        <h2>Qual nível de <span style="color:var(--cyan)">estudo?</span></h2>
-        <div class="card" onclick="finish('o', 'Universidade')"><h3>Superior / Master</h3><p>Foco acadêmico e residência longa.</p></div>
-        <div class="card" onclick="finish('o', 'Idioma')"><h3>Curso de Idioma</h3><p>Intercâmbio prático de curta duração.</p></div>
-        <div class="back-link" onclick="back(3)">Voltar</div>
-    </section>
-
-    <section id="sc-trabalho">
-        <div class="tag">04 . Atuação</div>
-        <h2>Qual seu <span style="color:var(--cyan)">perfil?</span></h2>
-        <div class="card" onclick="finish('o', 'Trabalho')"><h3>Procura Local</h3><p>Visto de busca de emprego europeu.</p></div>
-        <div class="card" onclick="finish('o', 'Nomade')"><h3>Digital Nomad</h3><p>Trabalho remoto internacional.</p></div>
-        <div class="back-link" onclick="back(3)">Voltar</div>
-    </section>
-
-    <section>
         <div class="res-box">
-            <div class="tag" id="user-title">RELATÓRIO</div>
+            <div class="tag" id="user-title">RELATÓRIO DE VIABILIDADE</div>
             <div id="res-visto" class="res-visto">---</div>
-            <p id="res-tempo" style="font-size: 0.65rem; color: #666; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px;">Tempo: ---</p>
+            <p id="res-desc" style="font-size: 0.8rem; color: #888; margin-bottom: 15px;">---</p>
             
-            <div class="grid-data">
-                <div class="data-item"><small>Reserva Total</small><span id="res-grana">---</span></div>
-                <div class="data-item"><small>Gasto Mensal</small><span id="res-custo">---</span></div>
+            <div class="info-pane">
+                <h4>Requisito Chave</h4>
+                <p id="res-req">---</p>
             </div>
 
             <div class="info-pane">
-                <h4>Documentação</h4>
-                <p id="res-docs">---</p>
-            </div>
-
-            <div class="info-pane">
-                <h4>Estratégia</h4>
-                <p id="res-obs">---</p>
+                <h4>Como eu vou te ajudar?</h4>
+                <p id="res-ajuda">---</p>
             </div>
         </div>
         
-        <button class="btn-sec" onclick="step(7, '', '')">PROSSEGUIR</button>
-        <button class="btn-main" onclick="location.reload()">NOVA CONSULTA</button>
-        <div class="footer-links"><a href="#">Privacidade</a><a href="#">Termos</a></div>
-    </section>
-
-    <section>
-        <div class="tag">Guia de Preparação</div>
-        <h2>Dicas de <span style="color:var(--cyan)">Logística.</span></h2>
-        
-        <div class="info-pane">
-            <h4>Bagagem Inteligente</h4>
-            <p>Priorize roupas de compressão. Leve adaptadores de tomada universais e cópias físicas de todos os documentos em uma pasta de mão. Evite excessos; compre itens de higiene no destino.</p>
-        </div>
-
-        <div class="info-pane">
-            <h4>Entrevista no Consulado</h4>
-            <p>Seja direto e honesto. Tenha em mãos o comprovante de hospedagem e meios financeiros. O foco deve ser o seu objetivo (estudo/trabalho) e sua intenção de respeitar as leis locais.</p>
-        </div>
-
-        <div class="info-pane">
-            <h4>Chegada e Chip</h4>
-            <p>Garanta um chip de celular (e-SIM) antes de embarcar ou no aeroporto. Tenha dinheiro em espécie (moeda local) para emergências de transporte inicial.</p>
-        </div>
-
-        <button class="btn-main" onclick="location.reload()">FINALIZAR TUDO</button>
-        <div class="back-link" onclick="back(6)">Voltar ao Relatório</div>
+        <a id="whatsapp-link" href="#" target="_blank" class="btn-whatsapp">FALAR COMIGO AGORA</a>
+        <button class="btn-main" onclick="location.reload()" style="background: transparent; color: #fff; border: 1px solid var(--border);">REFAZER TESTE</button>
     </section>
 
 </div>
 
 <script>
-    let choices = { name: '', f: null, c: null, t: null, o: null };
+    let choices = { name: '', perfil: '', detalhe: '' };
     const vp = document.getElementById('viewport');
+
+    window.addEventListener('load', () => {
+        createParticles();
+        setTimeout(() => {
+            document.getElementById('loadscreen').style.opacity = '0';
+            setTimeout(() => document.getElementById('loadscreen').style.display = 'none', 800);
+        }, 1500);
+    });
+
+    function createParticles() {
+        const container = document.getElementById('particles-container');
+        for (let i = 0; i < 20; i++) {
+            const p = document.createElement('div');
+            p.className = 'particle';
+            const size = Math.random() * 3 + 1 + 'px';
+            p.style.width = size;
+            p.style.height = size;
+            p.style.left = Math.random() * 100 + 'vw';
+            p.style.top = Math.random() * 100 + 'vh';
+            p.style.animationDelay = Math.random() * 10 + 's';
+            p.style.animationDuration = (Math.random() * 10 + 10) + 's';
+            container.appendChild(p);
+        }
+    }
 
     function validateName() {
         const input = document.getElementById('user-name');
         if (input.value.trim().length < 3) {
             input.classList.add('error');
-            setTimeout(() => input.classList.remove('error'), 300);
+            setTimeout(() => input.classList.remove('error'), 400);
         } else {
             choices.name = input.value.trim();
             vp.style.transform = `translateX(-100vw)`;
         }
     }
 
-    function step(s, k, v) { if(k) choices[k] = v; vp.style.transform = `translateX(-${s * 100}vw)`; }
+    function step(s, k, v) { 
+        choices[k] = v; 
+        if(s === 2) renderStep2();
+        vp.style.transform = `translateX(-${s * 100}vw)`; 
+    }
+
     function back(s) { vp.style.transform = `translateX(-${s * 100}vw)`; }
-    function moveVetor(v) { choices.t = v; vp.style.transform = (v === 'estudo') ? `translateX(-400vw)` : `translateX(-500vw)`; }
 
-    function finish(k, v) {
-        choices.o = v;
-        const key = choices.c + choices.o;
-        const db = {
-            "PortugalUniversidade": { v: "Visto D4 - Acadêmico", t: "4-6 Meses", g: "R$ 52.000", c: "€ 850 - 1.100", d: "Aceite IES, Seguro PB4, Antecedentes e Alojamento.", o: "PB4 isenta seguro privado. Trabalho permitido 20h/semana." },
-            "EspanhaIdioma": { v: "Visado de Idiomas", t: "2-3 Meses", g: "R$ 38.000", c: "€ 950 - 1.300", d: "Matrícula, Seguro Sanitas, Exame Médico e IPREM.", o: "Permite 30h de trabalho semanais. Seguro sem copagamento." },
-            "PortugalTrabalho": { v: "Visto Procura Trabalho", t: "2-4 Meses", g: "R$ 16.500", c: "€ 900", d: "IEFP, Seguro Viagem, Passagem e Subsistência.", o: "Válido por 120 dias. Ao contratar, solicita residência." }
+    function renderStep2() {
+        const container = document.getElementById('opcoes-detalhe');
+        container.innerHTML = '';
+        const perfis = {
+            'trabalho': [{t:'Procura de Trabalho', d:'Ir para buscar emprego local.', v:'procura'}, {t:'Visto CPLP', d:'Processo para brasileiros.', v:'cplp'}],
+            'estudo': [{t:'Ensino Superior', d:'Faculdade ou Mestrado.', v:'superior'}, {t:'Curso de Idioma', d:'Aprender nova língua.', v:'idioma'}],
+            'remoto': [{t:'Digital Nomad', d:'Ganho mais de € 3.280/mês.', v:'nomade'}, {t:'Visto D2', d:'Empreendedor ou Freelancer.', v:'d2'}],
+            'turismo': [{t:'Turismo', d:'Visita rápida (90 dias).', v:'turismo'}]
         };
+        perfis[choices.perfil].forEach(item => {
+            container.innerHTML += `<div class="card" onclick="finish('${item.v}')"><h3>${item.t}</h3><p>${item.d}</p></div>`;
+        });
+    }
 
-        const res = db[key] || { v: "Visto Selecionado", t: "3 Meses", g: "R$ 30k+", c: "€ 1000", d: "Documentos padrão consulares.", o: "Consulte o consulado para detalhes." };
-        
+    function finish(visto) {
+        const db = {
+            "procura": { v: "Visto Procura Trabalho", d: "Entrada legal para buscar emprego.", r: "3 salários mínimos (€ 2.460).", a: "Eu vou montar todo o seu dossiê, cuidar do agendamento e garantir que sua documentação esteja impecável para aprovação." },
+            "cplp": { v: "Visto CPLP", d: "Regime facilitado para brasileiros.", r: "Antecedentes e subsistência.", a: "Eu vou guiar você em cada passo do pedido online, garantindo que você aproveite as facilidades do acordo CPLP com segurança." },
+            "superior": { v: "Visto D4 (Estudo)", d: "Residência para fins acadêmicos.", r: "Matrícula e alojamento.", a: "Eu vou te ajudar a organizar a carta de aceite, comprovativos de alojamento e o seguro PB4 para uma imigração tranquila." },
+            "idioma": { v: "Visto de Estudo", d: "Cursos certificados.", r: "Pagamento do curso e meios.", a: "Eu vou validar a escola escolhida e preparar todo o processo para que seu foco seja apenas no aprendizado." },
+            "nomade": { v: "Digital Nomad", d: "Trabalho remoto internacional.", r: "Média mensal de € 3.280.", a: "Eu vou cuidar da prova de rendimentos e da estratégia para que o governo português aceite sua fonte de renda estrangeira." },
+            "d2": { v: "Visto D2", d: "Imigração para empreendedores.", r: "Plano de negócio.", a: "Eu vou te auxiliar na criação do plano de negócios e na viabilidade do visto D2, transformando sua empresa em residência." },
+            "turismo": { v: "Planejamento Turístico", d: "Permanência de curto prazo.", r: "Seguro, hotel e passagem.", a: "Eu vou preparar você para a entrevista na imigração e organizar todos os documentos necessários para evitar qualquer risco de recusa." }
+        };
+        const res = db[visto];
         document.getElementById('user-title').innerText = `PLANO: ${choices.name.toUpperCase()}`;
         document.getElementById('res-visto').innerText = res.v;
-        document.getElementById('res-tempo').innerText = `Tempo Médio: ${res.t}`;
-        document.getElementById('res-grana').innerText = res.g;
-        document.getElementById('res-custo').innerText = res.c;
-        document.getElementById('res-docs').innerText = res.d;
-        document.getElementById('res-obs').innerText = res.o;
-        vp.style.transform = `translateX(-600vw)`;
+        document.getElementById('res-desc').innerText = res.d;
+        document.getElementById('res-req').innerText = res.r;
+        document.getElementById('res-ajuda').innerText = res.a;
+
+        const msg = encodeURIComponent(`Oi, meu nome é ${choices.name}, vim pelo site queria saber mais sobre vistos de Portugal etc...`);
+        document.getElementById('whatsapp-link').href = `https://wa.me/5511999999999?text=${msg}`;
+        vp.style.transform = `translateX(-300vw)`;
     }
 </script>
 
 </body>
 </html>
-
